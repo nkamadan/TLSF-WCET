@@ -40,7 +40,7 @@ void cache_flush(long long int cache_size){
       printf("Memory not allocated. \n");
     }
     // Where memory is allocated
-    printf("The address of the pointer is:%u\n ", ptr);
+    // printf("The address of the pointer is:%u\n ", ptr);
 
     // Assign values to the ptr created
     for(int i=0;i<cache_size;i++){
@@ -81,9 +81,9 @@ void wcet_malloc(){ //Pre-condition: No block is initally allocated.
 
 	        // Memory has been successfully allocated
 	        printf("Memory successfully allocated using malloc().\n");
-	        printf( "******************************************************************************************************\n");
+	        printf( "**************************************************\n");
 	        printf("WCET for malloc() is:  %lf.\n", cpu_time_used);
-	        printf( "******************************************************************************************************\n");
+	        printf( "**************************************************\n");
 	    }
 	    //Free the allocated block and flush the cache.
 	    free(ptr);
@@ -132,9 +132,9 @@ void wcet_free(){
 				free(ptr2);
 				end = clock();
 				cpu_time_used = ((double) (end - start)); // CLOCKS_PER_SEC;
-				printf( "******************************************************************************************************\n" );
+				printf( "*********************************\n" );
 		        	printf("WCET for free() is:  %lf.\n", cpu_time_used);
-		    		printf( "******************************************************************************************************\n" );
+				printf( "*********************************\n" );
 			}
 		}
 	}
@@ -155,9 +155,9 @@ void average_malloc(){
 	    cpu_time_used += ((double) (end - start)); // CLOCKS_PER_SEC;
 	}
 
-	printf( "******************************************************************************************************\n" );
+	printf( "*********************************\n" );
 	printf( "Average time for malloc(): %lf\n", cpu_time_used/1000);
-	printf( "******************************************************************************************************\n" );
+	printf( "*********************************\n" );
 
 
 	//Free all allocated blocks
@@ -186,9 +186,9 @@ void average_free(){
 		}
 	cpu_time_used = cpu_time_used/1000;
 
-	printf( "******************************************************************************************************\n" );
+	printf( "*********************************\n" );
 	printf( "Average time for free(): %lf\n", cpu_time_used);
-	printf( "******************************************************************************************************\n" );
+	printf( "*********************************\n" );
 
 }
 
