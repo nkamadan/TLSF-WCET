@@ -34,7 +34,6 @@ void cache_flush(long long int cache_size){
 	//int flush_result =  cacheflush(void *addr, int nbytes, int cache);
 
     int* ptr;
-    // We want ptr to store the space of 10* cache_size
     ptr = (int*) malloc(cache_size * sizeof(int));
 
     if(ptr==NULL){
@@ -95,12 +94,51 @@ void wcet_free(){
 
 	printf( "Calculating the WCET for free()\n...\n" );
 	printf( "WCET for free() occurs when the released block has to be coalesced with its two neighbour blocks\n...\n" );
-	/* Test-5 free worst case for TLSF. The memory pool is
-	1 MB. Three 512-byte blocks are allocated, then the first
-	and third blocks are released. The time to release the second
-	block is the worst-case scenario */
+	printf( "In this program, a synthetic workload model is used where three 512-byte blocks are allocated, "
+			"then the first and third blocks are released and the time to release the second block is the worst case\n...\n" );
 
-	printf( "In this program, a synthetic workload model is used where initially no memory is allocated and program requests for a 40 byte block\n...\n" );
+	clock_t start, end;
+	double cpu_time_used;
+
+	void* ptr1;
+	void* ptr2;
+	void* ptr3;
+
+	ptr1 = malloc(512);
+	if(ptr1 == NULL){
+		printf("Allocation failed for ptr1, try again!");
+	}
+	else{
+		ptr2 = malloc(512);
+		if(ptr2 == NULL){
+			printf("Allocation failed for ptr2, try again!");
+			free(ptr1);
+		}
+		else{
+			ptr3 = malloc(512);
+			if(ptr3 == NULL){
+				printf("Allocation failed for ptr3, try again!");
+				free(ptr1);
+				free(ptr2);
+			}
+			else{
+				//All allocations are successful.
+				//First free the first allocated block.
+				free(ptr1);
+				//Then, free the third allocated block.
+				free(ptr3);
+				//Finally, worst case happens when the second block which needs to be coalesced with its neighbors is freed.
+				start = clock();
+				free(ptr2);
+				end = clock();
+				cpu_time_used = ((double) (end - start)); // CLOCKS_PER_SEC;
+				printf( "******************************************************************************************************\n" );
+		        printf("WCET for free() is:  %lf.\n", cpu_time_used);
+		    	printf( "******************************************************************************************************\n" );
+			}
+		}
+	}
+
 }
 
 void average_malloc(){
