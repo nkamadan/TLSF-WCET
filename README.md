@@ -56,7 +56,7 @@ bound”(1)
 2. Allocation request may fail in an unpredictable manner (Because of heap fragmentation)
 3. Inefficient memory utilization (External Fragmentation)
 
-![6K of memory request, no contiguous block--> Fail](3.1.png)
+![6K of memory request, no contiguous block--> Fail](images/3.1.png)
 
 # Requirements of real-time systems regarding dynamic memory
 1. Bounded response time: WCET of memory allocation and deallocation must be known.
@@ -92,7 +92,7 @@ bound”(1)
 * Second level: Divides the size range indicated by the first level by 4. Example: 2^6 first level covers the range of free list blocks of [2^6,2^7) --> This range is divided into 4 equidistant blocks.
 * Bitmap for each level. 1 indicates the presence of free blocks under the level.
 
-![TLSF Data Structure for Free Blocks](ds.png)
+![TLSF Data Structure for Free Blocks](images/ds.png)
 
 
 ## Finding a free block in TLSF malloc()
