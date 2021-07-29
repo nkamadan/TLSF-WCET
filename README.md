@@ -9,7 +9,7 @@
 * WCET : The maximum length of time a task takes to execute on a specific hardware platform.
 
 # WCET-BCET
-![Time analysis of a sample task](2.1.jpg)
+![Time analysis of a sample task](images/2.1.jpg)
 
 
 # How to measure WCET?
